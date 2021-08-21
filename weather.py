@@ -14,34 +14,35 @@ def GetWeather(canvas):
     pressure = json_data['main']['pressure']
     humidity = json_data['main']['humidity']
     windspeed = json_data['wind']['speed']
-    sunrise = time.strftime("%H:%M:%S", time.gmtime(json_data['sys']['sunrise'] - 18000))
-    sunset = time.strftime("%H:%M:%S", time.gmtime(json_data['sys']['sunset'] - 18000))
+    sunrise = time.strftime("%I:%M:%S", time.gmtime(json_data['sys']['sunrise'] - 18000))
+    sunset = time.strftime("%I:%M:%S", time.gmtime(json_data['sys']['sunset'] - 18000))
 
     final_info = weather_condition + "\n" + str(temperature) + "°C"
-    final_data = "\n" + "Maximum Temperature: " + str(maximum_temperature) + "\n" + "Minimum Temperature: " + str(
-        minimum_temperature) + "\n" + "Pressure: " + str(pressure) + "\n" + "Humidity: " + str(
-        humidity) + "\n" + "Windspeed: " + str(windspeed) + "\n" + "Sunrise: " + sunrise + "\n" + "Sunset: " + sunset
+    final_data = "\nMax Temperature:\t" + str(maximum_temperature) + "°C\nMin Temperature:\t" + str(
+        minimum_temperature) + "°C\nPressure:\t\t" + str(pressure) + " mb\nHumidity:\t\t" + str(
+        humidity) + " %\nWindspeed: \t" + str(windspeed) + " km/h\nSunrise:\t\t" + sunrise + "\nSunset:\t\t" + sunset
     label1.config(text=final_info)
     label2.config(text=final_data)
 
 
 canvas = tk.Tk()
-canvas.geometry("600x500")
+canvas.geometry("600x550")
 canvas.title("Weather")
 canvas.iconbitmap('images/icon.ico')
+canvas.configure(bg='black')
 
-f = ("poppins", 15, "bold")
-t = ("poppins", 35, "bold")
+f = ("verdana", 15, "bold")
+t = ("verdana", 35, "bold")
 
-textfield = tk.Entry(canvas, justify='center', font=t)
+textfield = tk.Entry(canvas, justify='center', font=t, fg="black")
 textfield.pack(pady=20)
 textfield.focus()
 textfield.bind('<Return>', GetWeather)
 
-label1 = tk.Label(canvas, font=t)
-label1.pack()
+label1 = tk.Label(canvas, font=t, fg="white", bg="black", bd=2, relief="flat")
+label1.pack(ipady=5, ipadx=5)
 
-label2 = tk.Label(canvas, font=f)
-label2.pack()
+label2 = tk.Label(canvas, font=f, fg="white", bg="black", bd=2, relief="flat", justify="left")
+label2.pack(pady=5, ipady=5, ipadx=5)
 
 canvas.mainloop()
