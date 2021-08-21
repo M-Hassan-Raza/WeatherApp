@@ -14,8 +14,8 @@ def GetWeather(canvas):
     pressure = json_data['main']['pressure']
     humidity = json_data['main']['humidity']
     windspeed = json_data['wind']['speed']
-    sunrise = time.strftime("%I:%M:%S", time.gmtime(json_data['sys']['sunrise'] - 18000))
-    sunset = time.strftime("%I:%M:%S", time.gmtime(json_data['sys']['sunset'] - 18000))
+    sunrise = time.strftime("%I:%M:%S", time.gmtime(json_data['sys']['sunrise'] - int(json_data['timezone'])))
+    sunset = time.strftime("%I:%M:%S", time.gmtime(json_data['sys']['sunset'] - int(json_data['timezone'])))
 
     final_info = weather_condition + "\n" + str(temperature) + "°C"
     final_data = "\nMax Temperature:\t" + str(maximum_temperature) + "°C\nMin Temperature:\t" + str(
